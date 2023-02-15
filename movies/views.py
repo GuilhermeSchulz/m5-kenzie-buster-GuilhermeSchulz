@@ -35,3 +35,12 @@ class MovieSpecificView(APIView):
         except Movie.DoesNotExist:
             return Response(status.HTTP_404_NOT_FOUND)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def get(self, request, movie_id):
+        authentication_classes = []
+        try:
+            movie = Movie.objects.get(pk=movie_id)
+            serializer = MovieSerializer(movie)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Movie.DoesNotExist:
+            return Response(status.HTTP_404_NOT_FOUND)
