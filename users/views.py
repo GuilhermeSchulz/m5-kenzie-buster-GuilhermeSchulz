@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from rest_framework.views import APIView, Request, Response, status
-from .serializer import UserSerializer
-from rest_framework.exceptions import ValidationError
-import ipdb
+from .serializer import UserSerializer, CustomJWTSerializer
+
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 # Create your views here.
+
+
+class LoginView(TokenObtainPairView):
+    serializer_class = CustomJWTSerializer
 
 
 class UserView(APIView):

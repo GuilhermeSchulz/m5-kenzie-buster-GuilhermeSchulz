@@ -1,8 +1,16 @@
 from rest_framework import serializers
 from .models import User
-from rest_framework.validators import UniqueTogetherValidator
-from rest_framework.serializers import ValidationError
 from rest_framework.validators import UniqueValidator
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+
+class CustomJWTSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token["is_employee"] = user.is_employee
+
+        return token
 
 
 class UserSerializer(serializers.Serializer):
