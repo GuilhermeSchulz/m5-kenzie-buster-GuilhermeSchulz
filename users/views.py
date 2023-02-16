@@ -48,7 +48,6 @@ class UserSpecificView(APIView):
             data=request.data,
             context={"request": request, "user_id": user_id},
         )
-        print(serializer.is_valid())
         if serializer.is_valid():
             user = serializer.update(
                 User.objects.get(pk=user_id), serializer.validated_data

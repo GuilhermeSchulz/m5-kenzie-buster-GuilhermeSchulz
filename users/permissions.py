@@ -7,7 +7,6 @@ class UserOrEmployeeJWTAuthentication(JWTAuthentication):
     def authenticate(self, request):
 
         authenticated_user = super().authenticate(request)
-        print(self)
         if authenticated_user is None:
             return None
         user, token = authenticated_user
