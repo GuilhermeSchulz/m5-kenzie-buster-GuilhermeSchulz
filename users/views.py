@@ -21,6 +21,9 @@ class LoginView(TokenObtainPairView):
 
 
 class UserView(APIView):
+    authentication_classes = []
+    permission_classes = []
+
     def post(self, request: Request) -> Response:
         serializer = UserSerializer(data=request.data)
 
